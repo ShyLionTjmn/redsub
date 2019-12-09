@@ -8,8 +8,8 @@ import "github.com/ShyLionTjmn/redsub"
 // will return (nil, error) on connection error
 // on success there will be goroutine lanuched, listening for messages
 // it will send received "message" down to string channel sub.C
-// on any redis error will send error down to error channel sub.E AND terminate, closing redis connection
-// and both channels
+// on any redis error will send error down to error channel sub.E AND terminate
+// closing redis connection and both channels
 // caller should wait on sub.W sync.WaitGroup before continue
 // Close() redis connection sub.Conn to terminate
 sub, err := redsub.New("unix", "/tmp/redis.sock", "channel")
