@@ -21,7 +21,7 @@ type Redsub struct {
   Conn		redis.Conn
 }
 
-func New(red_stype, red_socket, red_db, red_channel string) (*Redsub, error) {
+func New(red_stype, red_socket, red_db, red_channel string, chan_len int) (*Redsub, error) {
 
   r := &Redsub{}
 
@@ -38,7 +38,7 @@ func New(red_stype, red_socket, red_db, red_channel string) (*Redsub, error) {
     return nil, err
   }
 
-  r.C = make(chan string, 1)
+  r.C = make(chan string, chan_len)
   r.E = make(chan error, 1)
 
   r.Conn.Send("SUBSCRIBE", red_channel)
