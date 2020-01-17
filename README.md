@@ -12,7 +12,8 @@ import "github.com/ShyLionTjmn/redsub"
 // closing redis connection and both channels
 // caller should wait on sub.W sync.WaitGroup before continue
 // Close() redis connection sub.Conn to terminate
-sub, err := redsub.New("unix", "/tmp/redis.sock", "channel")
+
+sub, err := redsub.New("unix", "/tmp/redis.sock", "0" /*redis db for connection checks only*/, "channel", 1 /*message channel length*/)
 
 if err == nil {
 
@@ -38,6 +39,7 @@ LOOP:
       }
       break LOOP
     }
+  }
   sub.W.Wait()
 }
 ```
